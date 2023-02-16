@@ -1,0 +1,6 @@
+services:
+  vpsmg2:
+    build: .
+    shm_size: 128gb
+    ports:
+      - "22:22"
