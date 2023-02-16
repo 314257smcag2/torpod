@@ -20,22 +20,22 @@ HiddenServicePort 22 127.0.0.1:22\n"\
 >> /etc/tor/torrc
 
 RUN mv /etc/ssh/sshd_config /etc/ssh/backup.sshd_config
-RUN echo "Protocol 2\n\
-IgnoreRhosts yes\n\
-HostbasedAuthentication no\n\
-PermitRootLogin no\n\
-PermitEmptyPasswords no\n\
-X11Forwarding no\n\
-MaxAuthTries 5\n\
-ClientAliveInterval 900\n\
-ClientAliveCountMax 0\n\
-Subsystem sftp internal-sftp\n\
-UsePAM yes\n\
-HostKey /etc/ssh/ssh_host_ed25519_key\n\
-HostKey /etc/ssh/ssh_host_rsa_key\n\
-KexAlgorithms curve25519-sha256@libssh.org\n\
-Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr\n\
-MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com\n"\
->> etc/ssh/sshd_config
+RUN echo "Protocol 2" >> etc/ssh/sshd_config
+RUN echo "IgnoreRhosts yes" >> etc/ssh/sshd_config
+RUN echo "HostbasedAuthentication no" >> etc/ssh/sshd_config
+RUN echo "PermitRootLogin no" >> etc/ssh/sshd_config
+RUN echo "PermitEmptyPasswords no" >> etc/ssh/sshd_config
+RUN echo "X11Forwarding no" >> etc/ssh/sshd_config
+RUN echo "MaxAuthTries 5" >> etc/ssh/sshd_config
+RUN echo "ClientAliveInterval 900" >> etc/ssh/sshd_config
+RUN echo "ClientAliveCountMax 0" >> etc/ssh/sshd_config
+RUN echo "Subsystem sftp internal-sftp" >> etc/ssh/sshd_config
+RUN echo "UsePAM yes" >> etc/ssh/sshd_config
+RUN echo "HostKey /etc/ssh/ssh_host_ed25519_key" >> etc/ssh/sshd_config
+RUN echo "HostKey /etc/ssh/ssh_host_rsa_key" >> etc/ssh/sshd_config
+RUN echo "KexAlgorithms curve25519-sha256@libssh.org" >> etc/ssh/sshd_config
+RUN echo "Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr" >> etc/ssh/sshd_config
+RUN echo "MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com" >> etc/ssh/sshd_config
 
+EXPOSE 22
 ENTRYPOINT service ssh start && service tor start && /bin/bash
