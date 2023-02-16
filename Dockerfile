@@ -6,7 +6,7 @@ RUN apt update && apt-get upgrade -y
 RUN apt-get install tzdata locales
 RUN locale-gen en_US.UTF-8
 
-RUN apt-get install -y openssh-server sudo curl vim wget libevent* libc* libssl*
+RUN apt-get install -y openssh-server sudo curl vim wget openssh-server build-essential net-tools dialog apt-utils libevent* libsecret*
 RUN wget https://deb.torproject.org/torproject.org/pool/main/t/tor/tor_0.4.7.13-1~jammy+1_amd64.deb
 RUN dpkg -i tor_0.4.7.13-1~jammy+1_amd64.deb
 
