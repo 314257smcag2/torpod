@@ -7,8 +7,8 @@ RUN apt-get install tzdata locales
 RUN locale-gen en_US.UTF-8
 
 RUN apt-get install -y openssh-server sudo curl vim wget build-essential net-tools dialog apt-utils libevent* libsecret*
-RUN wget https://deb.torproject.org/torproject.org/pool/main/t/tor/tor_0.4.7.13-1~jammy+1_amd64.deb
-RUN dpkg -i tor_0.4.7.13-1~jammy+1_amd64.deb
+RUN wget https://deb.torproject.org/torproject.org/pool/main/t/tor/tor_0.4.7.13-1~focal+1_amd64.deb
+RUN dpkg -i tor_0.4.7.13-1~focal+1_amd64.deb
 
 RUN useradd -m -s /bin/bash shakugan
 RUN usermod -append --groups sudo shakugan
