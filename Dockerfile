@@ -39,8 +39,11 @@ RUN echo "MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-
 RUN echo "service tor start" >>/VSCODETOr.sh
 RUN echo "service ssh start" >>/VSCODETOr.sh
 RUN echo "cat /var/lib/tor/onion-ssh/hostname" >>/VSCODETOr.sh
-
+RUN sudo chmod 755 VSCODETOr.sh
 
 EXPOSE 22
-CMD ./VSCODETOr.sh
+CMD  ./VSCODETOr.sh
+
+#EXPOSE 22
+#CMD ./VSCODETOr.sh
 #ENTRYPOINT service ssh start && service tor start && /bin/bash
