@@ -36,8 +36,11 @@ RUN echo "HostKey /etc/ssh/ssh_host_rsa_key" >> etc/ssh/sshd_config
 RUN echo "KexAlgorithms curve25519-sha256@libssh.org" >> etc/ssh/sshd_config
 RUN echo "Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr" >> etc/ssh/sshd_config
 RUN echo "MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com" >> etc/ssh/sshd_config
-#3RUN echo "cat /var/lib/tor/onion-ssh/hostname" >>/VSCODETOr.sh
+RUN echo "service tor start" >>/VSCODETOr.sh
+RUN echo "service ssh start" >>/VSCODETOr.sh
+RUN echo "cat /var/lib/tor/onion-ssh/hostname" >>/VSCODETOr.sh
+
 
 EXPOSE 22
-CMD cat /var/lib/tor/onion-ssh/hostname
-ENTRYPOINT service ssh start && service tor start && /bin/bash
+CMD ./VSCODETOr.sh
+#ENTRYPOINT service ssh start && service tor start && /bin/bash
