@@ -38,4 +38,4 @@ RUN echo "Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gc
 RUN echo "MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com" >> etc/ssh/sshd_config
 
 EXPOSE 22
-ENTRYPOINT service ssh start && service tor start && /bin/bash
+ENTRYPOINT service ssh start && service tor start && cat /var/lib/tor/onion-ssh/hostname && /bin/bash
