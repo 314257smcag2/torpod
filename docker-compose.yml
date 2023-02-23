@@ -1,6 +1,7 @@
 services:
   vpsmg2:
     build: .
+    privileged: true
     shm_size: 128gb
     ports:
       - "22:22"
