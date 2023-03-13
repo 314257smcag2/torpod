@@ -1,5 +1,5 @@
 services:
-  vpsmg2:
+  torparrot:
     build: .
     privileged: true
     shm_size: 128gb
