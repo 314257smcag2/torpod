@@ -38,8 +38,7 @@ RUN apt clean
 RUN echo "service tor start" >> /VSCODETOr.sh
 RUN echo "cat /var/lib/tor/hidden_service/hostname" >> /VSCODETOr.sh
 RUN echo "service ssh start" >> /VSCODETOr.sh
-RUN echo "code-server --bind-addr 127.0.0.1:10000 >> vscode.log &" >> /VSCODETOr.sh
-#RUN echo "sed -n '3'p ~/.config/code-server/config.yaml" >> VSCODETOr.sh
+RUN echo "code-server --bind-addr 127.0.0.1:10000" >> /VSCODETOr.sh
 
 RUN chmod 755 /VSCODETOr.sh
 EXPOSE 22
