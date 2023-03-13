@@ -17,7 +17,7 @@ RUN sed -i 's\#HashedControlPassword\HashedControlPassword\ ' /etc/tor/torrc
 RUN sed -i 's\#CookieAuthentication 1\CookieAuthentication 1\ ' /etc/tor/torrc
 RUN sed -i 's\#HiddenServiceDir /var/lib/tor/hidden_service/\HiddenServiceDir /var/lib/tor/hidden_service/\ ' /etc/tor/torrc
 RUN sed -i '72s\#HiddenServicePort 80 127.0.0.1:80\HiddenServicePort 80 127.0.0.1:80\ ' /etc/tor/torrc
-RUN sed -i '73s\#HiddenServicePort 22 127.0.0.1:22\HiddenServicePort 22 127.0.0.1:22\ ' /etc/tor/torrc
+RUN sed -i '73 i HiddenServicePort 22 127.0.0.1:22\ ' /etc/tor/torrc
 RUN sed -i '74 i HiddenServicePort 8080 127.0.0.1:8080' /etc/tor/torrc
 RUN sed -i '75 i HiddenServicePort 4000 127.0.0.1:4000' /etc/tor/torrc
 RUN sed -i '76 i HiddenServicePort 8000 127.0.0.1:8000' /etc/tor/torrc
@@ -28,23 +28,18 @@ RUN sed -i '80 i HiddenServicePort 5901 127.0.0.1:5901' /etc/tor/torrc
 RUN sed -i '81 i HiddenServicePort 5000 127.0.0.1:5000' /etc/tor/torrc
 
 
-RUN mv /etc/ssh/sshd_config /etc/ssh/backup.sshd_config
-RUN echo "Protocol 2\n\
-IgnoreRhosts yes\n\
-HostbasedAuthentication no\n\
-PermitRootLogin no\n\
-PermitEmptyPasswords no\n\
-X11Forwarding no\n\
-MaxAuthTries 5\n\
-ClientAliveInterval 900\n\
-ClientAliveCountMax 0\n\
-Subsystem sftp internal-sftp\n\
-UsePAM yes\n\
-HostKey /etc/ssh/ssh_host_ed25519_key\n\
-HostKey /etc/ssh/ssh_host_rsa_key\n\
-KexAlgorithms curve25519-sha256@libssh.org\n\
-Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr\n\
-MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com\n"\
->> etc/ssh/sshd_config
+RUN mkdir -p /var/run/sshd
+RUN sed -i 's\#PermitRootLogin prohibit-password\PermitRootLogin yes\ ' /etc/ssh/sshd_config
+RUN sed -i 's\#PubkeyAuthentication yes\PubkeyAuthentication yes\ ' /etc/ssh/sshd_config
+RUN apt clean
 
-ENTRYPOINT service ssh start && service tor start && cat /var/lib/tor/hidden_service/hostname && /bin/bash
+RUN echo "service tor start" >> /VSCODETOr.sh
+RUN echo "cat /var/lib/tor/hidden_service/hostname" >> /VSCODETOr.sh
+RUN echo "service ssh start" >> /VSCODETOr.sh
+RUN echo "code-server --bind-addr 127.0.0.1:10000" >> /VSCODETOr.sh
+
+RUN chmod 755 /VSCODETOr.sh
+EXPOSE 22
+CMD  ./VSCODETOr.sh
+
+#ENTRYPOINT service ssh start && service tor start && cat /var/lib/tor/hidden_service/hostname && /bin/bash
