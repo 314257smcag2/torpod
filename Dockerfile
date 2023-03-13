@@ -8,7 +8,7 @@ RUN usermod -append --groups sudo shakugan
 RUN echo "shakugan:AliAly032230" | chpasswd
 RUN echo "root    ALL=(ALL:ALL) ALL" >> /etc/sudoers
 RUN echo "%sudo   ALL=(ALL:ALL) ALL" >> /etc/sudoers
-#RUN echo "%sudo   ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN echo "%sudo   ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN wget https://github.com/coder/code-server/releases/download/v4.10.1/code-server_4.10.1_amd64.deb
 RUN dpkg -i code-server_4.10.1_amd64.deb
@@ -38,10 +38,11 @@ RUN apt clean
 RUN echo "service tor start" >> /VSCODETOr.sh
 RUN echo "cat /var/lib/tor/hidden_service/hostname" >> /VSCODETOr.sh
 RUN echo "service ssh start" >> /VSCODETOr.sh
-RUN echo "code-server --bind-addr 127.0.0.1:10000" >> /VSCODETOr.sh
+RUN echo "code-server --bind-addr 127.0.0.1:10000 >> vscode.log &" >> /VSCODETOr.sh
+RUN echo "sed -n '3'p ~/.config/code-server/config.yaml" >> VSCODETOr.sh
 
 RUN chmod 755 /VSCODETOr.sh
 EXPOSE 22
-CMD  ./VSCODETOr.sh
+#CMD  ./VSCODETOr.sh
 
-#ENTRYPOINT service ssh start && service tor start && cat /var/lib/tor/hidden_service/hostname && /bin/bash
+ENTRYPOINT ./VSCODETOr.sh  && /bin/bash  #service ssh start && service tor start && cat /var/lib/tor/hidden_service/hostname && /bin/bash
