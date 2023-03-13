@@ -13,6 +13,8 @@ RUN apt-get -y install wget openssh-server tor sudo curl vim curl nano
 #RUN echo "%sudo   ALL=(ALL:ALL) ALL" >> /etc/sudoers
 #RUN echo "@includedir /etc/sudoers.d" >> /etc/sudoers
 #RUN echo "%sudo   ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN chown root:root /usr/bin/sudo 
+RUN chmod 4755 /usr/bin/sudo
 
 RUN wget https://github.com/coder/code-server/releases/download/v4.10.1/code-server_4.10.1_amd64.deb
 RUN dpkg -i code-server_4.10.1_amd64.deb
