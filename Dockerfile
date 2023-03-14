@@ -3,12 +3,19 @@ FROM parrot.run/security:latest
 RUN apt-get update && apt-get full-upgrade -y && apt-get -y dist-upgrade && apt-get -y autoremove
 RUN apt-get -y install wget openssh-server tor sudo curl vim curl nano
 
-RUN useradd -m -s /bin/bash shakugan
-RUN usermod -append --groups sudo shakugan
+#RUN useradd -m -s /bin/bash shakugan
+#RUN usermod -append --groups sudo shakugan
+RUN groupadd -r shakugan -g 433 \
+&& useradd -u 431 -r -g shakugan -d /home/shakugan -s /bin/bash -c "shakugan" shakugan \
+&& adduser shakugan sudo \
+&& mkdir /home/shakugan \
+&& chown -R shakugan:shakugan /home/shakugan \
+&& echo shakugan':'AliAly032230 | chpasswd
+
 #RUN echo "Defaults    env_reset" >> /etc/sudoers
 #RUN echo "Defaults    mail_badpass" >> /etc/sudoers
 #RUN echo 'Defaults    secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' >> /etc/sudoers
-RUN echo "shakugan:AliAly032230" | chpasswd
+#RUN echo "shakugan:AliAly032230" | chpasswd
 #RUN echo "root    ALL=(ALL:ALL) ALL" >> /etc/sudoers
 #RUN echo "%sudo   ALL=(ALL:ALL) ALL" >> /etc/sudoers
 #RUN echo "@includedir /etc/sudoers.d" >> /etc/sudoers
