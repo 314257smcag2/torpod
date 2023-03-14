@@ -19,7 +19,7 @@ RUN groupadd -r shakugan -g 433 \
 #RUN echo "root    ALL=(ALL:ALL) ALL" >> /etc/sudoers
 #RUN echo "%sudo   ALL=(ALL:ALL) ALL" >> /etc/sudoers
 #RUN echo "@includedir /etc/sudoers.d" >> /etc/sudoers
-#RUN echo "%sudo   ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN echo "%sudo   ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 #RUN chown root:root /usr/bin/sudo 
 #RUN chown shakugan:shakugan /usr/bin/sudo 
 #RUN chmod 4755 /usr/bin/sudo
