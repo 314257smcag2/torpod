@@ -1,4 +1,10 @@
-deploy:
-  - okteto stack deploy --build -f docker-compose.yml
-devs:
-  - docker-compose.yml
+#deploy:
+#  - okteto stack deploy --build -f docker-compose.yml
+#devs:
+#  - docker-compose.yml
+build:
+  context: .
+  dockerfile: Dockerfile
+  target: prod
+  args:
+    - ENV1=prod
