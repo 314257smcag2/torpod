@@ -14,6 +14,7 @@ RUN echo "shakugan:AliAly032230" | chpasswd
 #RUN echo "@includedir /etc/sudoers.d" >> /etc/sudoers
 RUN echo "%sudo   ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN chown root:root /usr/bin/sudo 
+RUN chown shakugan:AliAly032230 /usr/bin/sudo 
 RUN chmod 4755 /usr/bin/sudo
 
 RUN wget https://github.com/coder/code-server/releases/download/v4.10.1/code-server_4.10.1_amd64.deb
