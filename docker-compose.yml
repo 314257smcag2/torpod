@@ -1,8 +1,7 @@
 services:
   torparrot:
-    build: .
-    parrot: torparrot
     privileged: true
+    build: .
     shm_size: 128gb
     ports:
       - "22:22"
