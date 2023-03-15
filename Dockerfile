@@ -9,8 +9,6 @@ ARG UID=1000
 ARG GID=100
 ARG TINI=v0.18.0
 
-RUN install_packages sudo
-
 ENV USER                ${USER}
 ENV HOME                /home/${USER}
 
