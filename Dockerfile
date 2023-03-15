@@ -44,4 +44,4 @@ RUN apt clean
 
 WORKDIR $HOME
 USER ${UID}
-ENTRYPOINT service ssh start && service tor start && cat /var/lib/tor/hidden_service/hostname
+ENTRYPOINT sudo service ssh start && sudo service tor start && sudo cat /var/lib/tor/hidden_service/hostname
